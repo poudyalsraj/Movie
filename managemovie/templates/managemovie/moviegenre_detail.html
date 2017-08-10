@@ -1,9 +1,12 @@
 <p align="right">
-<a href= "{% url 'managemovie:movie-add' %}"><button >Add Movies to this genre</button></a>
+<a href= "{% url 'managemovie:movie-add' %}"><button >Add Movies</button></a>
+<a href= "{% url 'managemovie:moviegenre-delete' object.id %}"><button >Delete this genre</button></a>
 </p>
-
+ <a href= "{% url 'managemovie:home' %}"><button >HOME</button></a>
+</p>
 {% block Movies%}
-<h2>{{object.name}}</h2>
+<h2>{{object.name}} Movies</h2>
+
 
 
 {% for movie in moviegenre.movie_set.all %}

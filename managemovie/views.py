@@ -4,12 +4,14 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import MovieGenre, Movie,  PageView
 from django.contrib.auth import authenticate 
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy,reverse
 
 
+#This class will display the listview of movigenre objects
 class MovieGenreListView(ListView):
-	model = MovieGenre
 	
+	model = MovieGenre
+	template_name= 'managemovie/home.html'
 	def get_context_data(self, **kwargs):
 		context = super(MovieGenreListView, self).get_context_data(**kwargs)
 		
@@ -25,8 +27,9 @@ class MovieGenreListView(ListView):
 		context.update(context1)
 		return context
 		
-
+#This class will display the Detail of movigenre objects that includes all the movies related to that genre
 class MovieGenreDetailView(DetailView):
+	
 	model=MovieGenre
 	def get_context_data(self, **kwargs):
 
@@ -35,32 +38,43 @@ class MovieGenreDetailView(DetailView):
 		return context
 
 
+#this class will create form field of the genres
 class MovieGenreCreateView(CreateView):
+		
 		model = MovieGenre
 		fields= [
 			'name',
 			'image',
 			'discription'
 			]
-		success_url = reverse_lazy('managemovie:moviegenre-list')
+		success_url = reverse_lazy('managemovie:home')
 
-class MovieGenreUpdateView(CreateView):
+
+#this class will render the form field with field value to update the genre objects
+class MovieGenreUpdateView(UpdateView):
+		
 		model = MovieGenre
 		fields= [
 			'name',
 			'image',
 			'discription'
 			]
-		success_url = reverse_lazy('managemovie:moviegenre-list')
+		success_url = reverse_lazy('managemovie:home')
 
-
-class MovieGenreDeleteView(CreateView):
+#this class will delete the genre objects
+class MovieGenreDeleteView(DeleteView):
+		
 		model = MovieGenre
-		success_url = reverse_lazy('managemovie:moviegenre-list')
+		success_url = reverse_lazy('managemovie:home')
 
+
+#******************************************************************************************
+#following this codes are for movie 
+
+#this class will display the listview of the movie objects
 class MovieListView(ListView):
+
 	model = Movie
-	
 	def get_context_data(self, **kwargs):
 		context = super(MovieListView, self).get_context_data(**kwargs)
 		
@@ -77,17 +91,18 @@ class MovieListView(ListView):
 		return context
 
 
-
+#this class will display the detailview of the movie objects
 class MovieDetailView(DetailView):
+	
 	model=Movie
-	 
 	def get_context_data(self, **kwargs):
-
 		context = super(MovieDetailView, self).get_context_data(**kwargs)
 		return context
 	
 
+#this class will create and display the form field for the movie objects to add new objects
 class MovieCreateView(CreateView):
+		
 		model = Movie
 		fields= [
 			'title',
@@ -98,10 +113,11 @@ class MovieCreateView(CreateView):
 			'synopsisa',
 			'logo','trailer'
 			]
-		success_url = reverse_lazy('managemovie:movie-list')
+		success_url = reverse_lazy('managemovie:home')
 
-
+#this class will create and display the form field with field value 
 class MovieUpdateView(UpdateView):
+		
 		model = Movie
 		fields= [
 			'title',
@@ -112,18 +128,19 @@ class MovieUpdateView(UpdateView):
 			'logo','trailer'
 			]
 		def get_success_url(self):
-			succ_url =  '?pk='+self.request.GET.get('gid')
-			return succ_url
-		#success_url = reverse_lazy('managemovie:moviegenre-list')
+			return reverse('managemovie:moviegenre-detail', args=(self.object.genre.id,))
 
+
+#this class will delete the movie objects
 class MovieDeleteView(DeleteView):
 		model = Movie
-		success_url = reverse_lazy('managemovie:moviegenre-list')
+		def get_success_url(self):
+			return reverse('managemovie:moviegenre-detail', args=(self.object.genre.id,))
 
 
 
 
-
+#*********************************Raw Codes****************************************
 
 # # class UserCreateView(CreateView):
 # # 		model = User

@@ -6,9 +6,10 @@ app_name='managemovie'
 
 urlpatterns=[
 
-	url(r'^$', views.MovieGenreListView.as_view(), name='moviegenre-list'),
+	url(r'^$', views.MovieGenreListView.as_view(), name='home'),
 	url(r'^(?P<pk>\d+)/$', views.MovieGenreDetailView.as_view(), name='moviegenre-detail'),
 	url(r'^add/genre$', views.MovieGenreCreateView.as_view(), name='moviegenre-add'),
+	url(r'^(\d+)/delete//$', views.MovieGenreDeleteView.as_view(), name='moviegenre-delete'),
 
 	url(r'^movie$', views.MovieListView.as_view(), name='movie-list'),
 

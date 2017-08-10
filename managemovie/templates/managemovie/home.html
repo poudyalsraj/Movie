@@ -1,36 +1,32 @@
 <html>
-<body>
 
-<h1><b>Cinema Ghar <b><h1>
-<table >
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Genre</th>
-      <th>language</th>
-      <th>release_date</th>
-      <th>producer</th>
-      <th>director</th>
-      <th>synopsisa</th>
-      <th>logo</th>
-      <th>trailer</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in Movie %}
-      <tr>
-        <td>{{ user.title }}</td>
-        <td>{{ user.Genre }}</td>
-        <td>{{ user.language }}</td>
-        <td>{{ user.release_date }}</td>
-        <td>{{ user.producer }}</td>
-        <td>{{ user.director }}</td>
-        <td>{{ user.synopsisa }}</td>
-        <td>{{ user.logo }}</td>
-        <td>{{ user.trailer }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-</body>
+<p align="right">
+    <a href= "{% url 'managemovie:moviegenre-add' %}"><button >Add Genre</button></a>
+    <br>
+    page viewed count:{{ page}}
+</p>
+
+<center>
+<h1>Welcome to Cinema Ghar</h1>
+<h7>Online movie ticket booking system</h7>
+
+<br>
+
+<br>
+<h3>Genre</h3>
+<ul>
+{% for i in object_list%}
+    <li>
+
+    	<a href ='{{i.id}}'>{{ i.name }} 
+    	</a>
+    </li>
+{% empty %}
+    <li>No Genre yet.</li>
+{% endfor %}
+</ul>
+
+</center>
 </html>
+
+
