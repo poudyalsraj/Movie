@@ -61,11 +61,13 @@ class MovieGenreUpdateView(UpdateView):
 			]
 		success_url = reverse_lazy('managemovie:home')
 
+
 #this class will delete the genre objects
 class MovieGenreDeleteView(DeleteView):
 		
 		model = MovieGenre
 		success_url = reverse_lazy('managemovie:home')
+
 
 
 #******************************************************************************************

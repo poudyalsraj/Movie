@@ -17,7 +17,7 @@ class Movie(models.Model):
 	genre=models.ForeignKey(MovieGenre, on_delete=models.CASCADE)
 	language= models.CharField(max_length=30)
 	release_date=models.DateField()
-	synopsisa=models.TextField(max_length=300)
+	synopsisa=models.TextField(max_length=300 ,blank=True)
 	logo=models.FileField(blank=True)
 	trailer=models.TextField(max_length=300)
 
