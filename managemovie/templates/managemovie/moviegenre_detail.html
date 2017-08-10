@@ -1,0 +1,26 @@
+<p align="right">
+<a href= "{% url 'managemovie:movie-add' %}"><button >Add Movies to this genre</button></a>
+</p>
+
+{% block Movies%}
+<h2>{{object.name}}</h2>
+
+
+{% for movie in moviegenre.movie_set.all %}
+
+  <li>
+
+    	<a href ='{% url 'managemovie:movie-detail' object.id movie.id %}'>{{ movie.title }} </a>
+    	
+   		<a href= '{% url 'managemovie:movie-update' object.id movie.id %}'><button> Update </button> </a>
+
+   		<a href= '{% url 'managemovie:movie-delete' object.id movie.id  %}'><button> Delete </button> </a>
+   		
+    </li> 
+  
+
+
+  <br> 
+{% endfor %}
+  
+{% endblock %}

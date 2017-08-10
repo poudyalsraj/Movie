@@ -1,0 +1,36 @@
+
+
+<h1>Welcome to Cinema Ghar</h1>
+<h4>Online movie ticket booking system</h4>
+
+{% if user.is_authenticated %}
+      Hi {{ user.username }}!
+{% endif %}
+<br>
+
+count:{{ page}}
+
+<form  method ='Get'  action=''>
+	<input type='text' name= 'q' placeholder= 'search' />
+	<input type ='submit' value= 'Search' >
+
+
+
+</form>
+
+<h3>Now showing movies</h3>
+<ul>
+{% for movie in object_list%}
+    <li>
+
+    	<a href ='{{movie.id}}'>{{ movie.title }} 
+    	</a>
+    	>>>><button>Book Now</button>
+
+    </li>
+{% empty %}
+    <li>No Movies yet.</li>
+{% endfor %}
+</ul>
+
+
